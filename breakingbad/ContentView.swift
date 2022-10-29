@@ -46,7 +46,7 @@ struct ContentView: View {
             }
             .animation(.default, value: fetch.quoteID)
         }
-        .searchable(text: $fetch.searchText)
+        .searchable(text: $fetch.searchText, prompt: "Search Quotes")
         .textInputAutocapitalization(.never)
         .onChange(of: fetch.searchText){searchText in
             if !searchText.isEmpty{

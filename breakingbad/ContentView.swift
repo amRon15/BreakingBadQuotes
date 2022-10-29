@@ -8,45 +8,63 @@
 import SwiftUI
 import CoreData
 
+struct Quote : Codable,Hashable {
+    let quote_id : Int
+    let quote : String
+    let author : String
+}
+
+
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
+    @StateObject var fetch = fetchAPI()
+    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
-
+    
+    //    @State private var quotes = [Quote]()
+    
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+        NavigationView{
+            VStack(spacing: 15){
+                List(fetch.allQuote,id: \.self){quote in
+                    VStack(alignment: .leading, spacing: 10){
+                        Text(quote.quote)
+                            .font(.title3)
+                        Text("By: \(quote.author)")
+                            .frame(maxWidth: .infinity,alignment: .bottomTrailing)
                     }
+                    .frame(maxWidth: .infinity,alignment: .leading)
                 }
-                .onDelete(perform: deleteItems)
+                .listStyle(.plain)
+                .navigationTitle("All Quotes")
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
+            .task {
+                await fetch.loadData()
             }
-            Text("Select an item")
+            .animation(.default, value: fetch.quoteID)
+        }
+        .searchable(text: $fetch.searchText, prompt: "Search Quotes")
+        .textInputAutocapitalization(.never)
+        .onChange(of: fetch.searchText){searchText in
+            if !searchText.isEmpty{
+                fetch.allQuote = fetch.quotes.filter{ $0.quote.uppercased().contains(searchText.uppercased())}
+            }
+            else {
+                fetch.allQuote = fetch.quotes
+            }
         }
     }
-
+    
+    
+    
     private func addItem() {
         withAnimation {
             let newItem = Item(context: viewContext)
             newItem.timestamp = Date()
-
+            
             do {
                 try viewContext.save()
             } catch {
@@ -57,11 +75,11 @@ struct ContentView: View {
             }
         }
     }
-
+    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             offsets.map { items[$0] }.forEach(viewContext.delete)
-
+            
             do {
                 try viewContext.save()
             } catch {

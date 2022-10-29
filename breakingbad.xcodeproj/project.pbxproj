@@ -16,6 +16,7 @@
 		08FBA184290C312C00528180 /* breakingbadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FBA183290C312C00528180 /* breakingbadTests.swift */; };
 		08FBA18E290C312C00528180 /* breakingbadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FBA18D290C312C00528180 /* breakingbadUITests.swift */; };
 		08FBA190290C312C00528180 /* breakingbadUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FBA18F290C312C00528180 /* breakingbadUITestsLaunchTests.swift */; };
+		08FBA19D290C339400528180 /* VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FBA19C290C339400528180 /* VM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		08FBA189290C312C00528180 /* breakingbadUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = breakingbadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		08FBA18D290C312C00528180 /* breakingbadUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = breakingbadUITests.swift; sourceTree = "<group>"; };
 		08FBA18F290C312C00528180 /* breakingbadUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = breakingbadUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		08FBA19C290C339400528180 /* VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			children = (
 				08FBA16D290C312A00528180 /* breakingbadApp.swift */,
 				08FBA16F290C312A00528180 /* ContentView.swift */,
+				08FBA19C290C339400528180 /* VM.swift */,
 				08FBA171290C312C00528180 /* Assets.xcassets */,
 				08FBA176290C312C00528180 /* Persistence.swift */,
 				08FBA178290C312C00528180 /* breakingbad.xcdatamodeld */,
@@ -266,6 +269,7 @@
 				08FBA177290C312C00528180 /* Persistence.swift in Sources */,
 				08FBA170290C312A00528180 /* ContentView.swift in Sources */,
 				08FBA17A290C312C00528180 /* breakingbad.xcdatamodeld in Sources */,
+				08FBA19D290C339400528180 /* VM.swift in Sources */,
 				08FBA16E290C312A00528180 /* breakingbadApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
